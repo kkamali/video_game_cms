@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20191125224714) do
 
   create_table "video_games", force: :cascade do |t|
     t.string "title"
-    t.string "publisher"
+    t.string "developers"
     t.string "genre"
   end
 
