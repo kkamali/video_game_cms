@@ -1,15 +1,21 @@
+require 'pry'
 class UserController < ApplicationController
+
+  get '/home' do
+    @user = User.find(session[:user_id])
+    erb :'users/index'
+  end
 
   get '/signup' do
     erb :'users/sign_up'
   end
 
   post '/signup' do
-    user = User.new(params)
+    user = User.create(params)
     session[:user_id] = user.id
 
     if user.save
-      erb :'users/index'
+      redirect '/home'
     else
       redirect '/signup'
     end
@@ -25,7 +31,7 @@ class UserController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
 
-      erb :'users/index'
+      redirect '/home'
     else
       redirect '/login'
     end
