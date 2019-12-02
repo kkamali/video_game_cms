@@ -6,10 +6,13 @@ class GameController < ApplicationController
   end
 
   get '/games/new' do
-    erb :'video_games/new'
+    erb :'games/new'
   end
 
   post '/games/new' do
-    binding.pry
+    user = User.find(session[:user_id])
+    user.games.create(params)
+
+    redirect '/games'
   end
 end
