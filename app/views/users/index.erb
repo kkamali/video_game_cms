@@ -1,1 +1,8 @@
 <h1>Welcome, <%= @user.username%></h1>
+<% if @user.games.length > 0 %>
+  <% @user.games.each do |game| %>
+    <%= game.title %>
+  <% end %>
+<% else %>
+  You don't have any games!
+<% end %>
