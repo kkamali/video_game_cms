@@ -13,16 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20191125224714) do
 
+  create_table "games", force: :cascade do |t|
+    t.string "title"
+    t.string "developers"
+    t.string "genre"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "username"
     t.string "password_digest"
-  end
-
-  create_table "video_games", force: :cascade do |t|
-    t.string "title"
-    t.string "developers"
-    t.string "genre"
   end
 
 end
