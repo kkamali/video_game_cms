@@ -26,7 +26,7 @@ class GameController < ApplicationController
     game = Game.find(params[:id])
     game.update(params)
 
-    redirect '/games/:id'
+    redirect "/games/#{game.id}"
   end
 
   get '/games/:id' do
