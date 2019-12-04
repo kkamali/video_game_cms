@@ -2,24 +2,34 @@ require 'pry'
 class GameController < ApplicationController
 
   get '/games' do
+    @games = Game.all
+
     erb :'games/index'
   end
 
   get '/games/new' do
-    erb :'games/new'
+    if logged_in?
+      erb :'games/new'
+    else
+      redirect '/login'
+    end
   end
 
   post '/games/new' do
-    user = User.find(session[:user_id])
+    user = current_user
     user.games.create(params)
 
     redirect '/games'
   end
 
   get '/games/:id/edit' do
-    @game = Game.find(params[:id])
+    if logged_in?
+      @game = Game.find(params[:id])
 
-    erb :'games/edit'
+      erb :'games/edit'
+    else
+      redirect '/login'
+    end
   end
 
   post '/games/:id/edit' do
