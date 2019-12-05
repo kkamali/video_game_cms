@@ -1,8 +1,10 @@
 <h1>Welcome, <%= @user.username%></h1>
 <% if @user.games.length > 0 %>
-  <% @user.games.each do |game| %>
-    <%= game.title %>
-  <% end %>
+  <ul>
+    <% @user.games.each do |game| %>
+      <li><a href="/games/<%= game.id %>"><%= game.title %></li>
+    <% end %>
+  </ul>
 <% else %>
   You don't have any games!
 <% end %>
