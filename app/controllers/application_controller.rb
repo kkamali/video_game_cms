@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    if session[:user_id].nil?
+      erb :index
+    else
+      redirect '/home'
+    end
   end
 
   helpers do
