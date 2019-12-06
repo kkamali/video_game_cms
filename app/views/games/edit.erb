@@ -1,4 +1,4 @@
-<form method="post" action="/games/<%= @game.id %>/edit">
+<form method="post" action="/games/<%= @game.sluggify %>/edit">
   <input type="text" name="title" value="<%= @game.title %>">
   <input type="text" name="developers" value="<%= @game.developers %>">
   <input type="text" name="genre" value="<%= @game.genre %>">

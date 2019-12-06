@@ -22,9 +22,9 @@ class GameController < ApplicationController
     redirect '/games'
   end
 
-  get '/games/:id/edit' do
+  get '/games/:slug/edit' do
     if logged_in?
-      @game = Game.find(params[:id])
+      @game = Game.find_by_slug(params[:slug])
 
       erb :'games/edit'
     else
@@ -32,16 +32,25 @@ class GameController < ApplicationController
     end
   end
 
-  post '/games/:id/edit' do
-    game = Game.find(params[:id])
+  post '/games/:slug/edit' do
+    game = Game.find_by_slug(params[:slug])
+    params.delete(:slug)
     game.update(params)
 
-    redirect "/games/#{game.id}"
+    redirect "/games/#{game.sluggify}"
   end
 
-  get '/games/:id' do
-    @game = Game.find(params[:id])
+  get '/games/:slug' do
+    @game = Game.find_by_slug(params[:slug])
+    @session = session
 
     erb :'games/show'
+  end
+
+  post '/games/:slug/delete' do
+    game = Game.find_by_slug(params[:slug])
+    Game.delete(game.id)
+
+    redirect '/games'
   end
 end
