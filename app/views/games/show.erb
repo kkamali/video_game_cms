@@ -1,8 +1,8 @@
 <h1><%= @game.title %></h1>
 <h3>Developed by <%= @game.developers %></h3>
 <h3>A <%= @game.genre %> game</h3>
-<a href="/games/<%= @game.sluggify %>/edit">Edit Game</a>
 <% if @session[:user_id] == @game.user_id %>
+  <a href="/games/<%= @game.sluggify %>/edit">Edit Game</a>
   <form method="post" action="/games/<%= @game.sluggify %>/delete">
     <input type="submit" value="Delete Game">
   </form>
