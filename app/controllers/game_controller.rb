@@ -17,9 +17,14 @@ class GameController < ApplicationController
 
   post '/games/new' do
     user = current_user
-    user.games.create(params)
+    binding.pry
+    if params[:title].empty?
+      redirect '/games/new'
+    else
+      user.games.create(params)
 
-    redirect '/games'
+      redirect '/games'
+    end
   end
 
   get '/games/:slug/edit' do
