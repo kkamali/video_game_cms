@@ -2,7 +2,11 @@ require 'pry'
 class UserController < ApplicationController
 
   get '/home' do
-    @user = User.find(session[:user_id])
+    if logged_in?
+      @user = current_user
+    else
+      redirect '/'
+    end
     erb :'users/index'
   end
 
