@@ -17,7 +17,6 @@ class GameController < ApplicationController
 
   post '/games/new' do
     user = current_user
-    binding.pry
     if params[:title].empty?
       redirect '/games/new'
     else
